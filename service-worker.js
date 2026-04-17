@@ -1,4 +1,4 @@
-const CACHE = 'adam-v1';
+const CACHE = 'adam-v2';
 const ASSETS = ['/', '/index.html'];
 
 self.addEventListener('install', e => {
