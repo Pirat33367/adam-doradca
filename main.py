@@ -270,3 +270,27 @@ async def analyze(
     conversations[sid] = history
 
     return {"reply": reply, "session_id": sid}
+
+
+# ---------- STATIC FILES ----------
+
+@app.get("/icon-192.png")
+def icon192(): return FileResponse("icon-192.png", media_type="image/png")
+
+@app.get("/icon-512.png")
+def icon512(): return FileResponse("icon-512.png", media_type="image/png")
+
+@app.get("/icon-maskable.png")
+def iconmaskable(): return FileResponse("icon-maskable.png", media_type="image/png")
+
+@app.get("/apple-touch-icon.png")
+def appleicon(): return FileResponse("apple-touch-icon.png", media_type="image/png")
+
+@app.get("/favicon.ico")
+def favicon(): return FileResponse("favicon.ico", media_type="image/x-icon")
+
+@app.get("/manifest.json")
+def manifest_file(): return FileResponse("manifest.json", media_type="application/json")
+
+@app.get("/service-worker.js")
+def sw(): return FileResponse("service-worker.js", media_type="application/javascript")
