@@ -1,0 +1,309 @@
+{
+  "firma": "Pekabet",
+  "opis": "Polski producent systemów kominowych od 1991r. Ceramika z niemieckiej firmy Wolfshöher Tonwerke — 160 lat tradycji. Certyfikaty europejskie EN 13063.",
+  "systemy_kominowe": [
+    {
+      "nazwa": "PEKABET FIRE",
+      "typ": "ceramiczny nieizolowany",
+      "paliwa": [
+        "gaz",
+        "pellet",
+        "olej"
+      ],
+      "kiedy_wybrac": "Tylko wewnątrz ogrzewanego budynku. Tańsza opcja dla paliw niskotemperaturowych.",
+      "kiedy_nie_wybrac": "Komin na zewnątrz lub w nieogrzewanym miejscu — bez izolacji szybko traci ciąg i kondensuje. Drewno i węgiel przekraczają 600°C — ceramika FIRE tego nie wytrzyma. Przy pellecie kondensat bez izolacji rozpu­ści zaprawę między wkładami — plamy na ścianach po 2-3 sezonach.",
+      "srednice": [
+        "Φ140",
+        "Φ160",
+        "Φ180",
+        "Φ200"
+      ],
+      "wysokosci_dostepne": "4.0m, 4.3m, 5.0m, 5.6m, 7.0m, 8.0m, 9.0m",
+      "uwagi": "Wersja z kanałem wentylacyjnym dostępna dla Φ140"
+    },
+    {
+      "nazwa": "PEKABET UNIWERSAL",
+      "typ": "ceramiczny izolowany wełną mineralną",
+      "paliwa": [
+        "pellet",
+        "gaz",
+        "drewno",
+        "węgiel",
+        "olej",
+        "ekogroszek"
+      ],
+      "kiedy_wybrac": "Pasuje do każdego paliwa i każdego miejsca — wewnątrz i na zewnątrz. Izolacja przyspiesza nagrzewanie i eliminuje kondensat na wkładach. Przy pellecie i gazie kondensat jest nieunikniony — UNIWERSAL go zbiera misą i odprowadza. Jeśli zmienisz kocioł za 10 lat na inny rodzaj paliwa — komin nadal działa.",
+      "kiedy_nie_wybrac": "Nie ma sytuacji gdzie byłby złym wyborem. Droższy od FIRE o 15-25%, ale unikasz napraw i zachowujesz 30-letnią gwarancję.",
+      "srednice": [
+        "Φ140",
+        "Φ180",
+        "Φ200"
+      ],
+      "wysokosci_dostepne": "4.0m, 5.3m, 6.6m, 7.0m, 10.6m, 14.6m",
+      "uwagi": "Izolacja wsuwana od czopucha pionowo. Wersja IZOLOWANY dla Φ140."
+    },
+    {
+      "nazwa": "PEKABET INOX nieizolowany",
+      "typ": "stalowy nierdzewny nieizolowany",
+      "paliwa": [
+        "gaz",
+        "pellet",
+        "olej"
+      ],
+      "kiedy_wybrac": "Szybszy montaż niż ceramika. Prowadzony wewnątrz budynku lub w istniejącym szybie kominowym.",
+      "kiedy_nie_wybrac": "Drewno i węgiel — stal bez izolacji się przegrzewa. Montaż zewnętrzny — bez izolacji traci ciąg zimą.",
+      "srednice": [
+        "Φ120",
+        "Φ140",
+        "Φ150",
+        "Φ160",
+        "Φ180"
+      ],
+      "wysokosci_dostepne": "4.0m, 5.0m, 6.0m"
+    },
+    {
+      "nazwa": "INOX IZOLOWANY",
+      "typ": "stalowy nierdzewny izolowany",
+      "paliwa": [
+        "pellet",
+        "gaz",
+        "drewno",
+        "olej"
+      ],
+      "kiedy_wybrac": "Montaż zewnętrzny lub w nieogrzewanych miejscach. Dobry ciąg nawet przy niskich temperaturach zewnętrznych.",
+      "srednice": [
+        "Φ120",
+        "Φ130",
+        "Φ140"
+      ],
+      "wysokosci_dostepne": "4.0m, 5.0m, 6.0m, 7.0m"
+    },
+    {
+      "nazwa": "TURBO INOX",
+      "typ": "stalowy nierdzewny turbo do kotłów kondensacyjnych",
+      "paliwa": [
+        "gaz kondensacyjny",
+        "pellet kondensacyjny"
+      ],
+      "kiedy_wybrac": "Kotły kondensacyjne i niskotemperaturowe. Małe średnice Φ80-100 dla nowoczesnych kotłów gazowych.",
+      "srednice": [
+        "Φ80",
+        "Φ100",
+        "Φ120",
+        "Φ140"
+      ],
+      "wysokosci_dostepne": "4.0m, 5.0m, 10.0m"
+    },
+    {
+      "nazwa": "PEKABET TURBO KERAMIK",
+      "typ": "ceramiczny do spalin mokrych — kotły kondensacyjne",
+      "paliwa": [
+        "gaz kondensacyjny",
+        "pellet kondensacyjny",
+        "olej kondensacyjny"
+      ],
+      "kiedy_wybrac": "Kotły kondensacyjne i niskotemperaturowe gdy klient chce ceramikę zamiast stali. Wyższa trwałość niż TURBO INOX, odporna na kondensat klasy W2. Dostępna do wysokości 25m.",
+      "kiedy_nie_wybrac": "Drewno i węgiel — system certyfikowany tylko do spalin mokrych (T200). Dla drewna i węgla potrzebny UNIWERSAL (T400-600).",
+      "srednice": [
+        "Φ140",
+        "Φ160",
+        "Φ180",
+        "Φ200",
+        "Φ220",
+        "Φ250",
+        "Φ300"
+      ],
+      "warianty": "Dostępny z kanałem wentylacyjnym (+W) i z dwoma kanałami wentylacyjnymi (+2W)",
+      "parametry_techniczne": {
+        "max_temperatura": "T200",
+        "kwasoodpornosc": "W2",
+        "max_wysokosc": "25m",
+        "norma": "EN 13063-2, EN 13063-3",
+        "certyfikat": "CE, Budowlany Instytut Techniczno-Badawczy Praga"
+      },
+      "roznica_od_turbo_inox": "TURBO KERAMIK ma wkłady ceramiczne — trwalsze, lepiej akumuluje ciepło, wyższa odporność na korozję długoterminową. TURBO INOX ma wkłady stalowe — szybszy montaż, niższa cena."
+    },
+    {
+      "nazwa": "DUO UNI",
+      "typ": "ceramiczny — dwa niezależne kanały spalinowe w jednym trzonie",
+      "paliwa": [
+        "pellet",
+        "gaz",
+        "drewno",
+        "węgiel"
+      ],
+      "kiedy_wybrac": "Dwa urządzenia grzewcze — jeden trzon. Oszczędność miejsca i fundamentu. Typowe zastosowanie: kocioł w kotłowni + kominek w salonie. Każde urządzenie ma swój oddzielny kanał — używanie jednocześnie jest dozwolone.",
+      "srednice": [
+        "Φ200"
+      ],
+      "wysokosci_dostepne": "4.0m, 4.3m, 5.0m, 6.0m, 10.0m"
+    },
+    {
+      "nazwa": "DUO CERAMIC",
+      "typ": "ceramiczny dwa kanały — wyższa odporność termiczna",
+      "paliwa": [
+        "pellet",
+        "drewno"
+      ],
+      "kiedy_wybrac": "Wersja DUO z wyższą odpornością termiczną. Gdy jedno z urządzeń pali drewnem.",
+      "srednice": [
+        "Φ180"
+      ],
+      "wysokosci_dostepne": "10.0m"
+    },
+    {
+      "nazwa": "SYSTEM PEKA",
+      "typ": "ceramiczny systemowy do wysokich kominów",
+      "paliwa": [
+        "pellet",
+        "gaz",
+        "drewno",
+        "węgiel"
+      ],
+      "kiedy_wybrac": "Wysokie kominy do 15m. Wersja IZOLOWANY do montażu zewnętrznego.",
+      "srednice": [
+        "Φ140",
+        "Φ200"
+      ],
+      "wysokosci_dostepne": "4.0m, 5.0m, 6.0m, 13.0m, 14.0m, 15.0m"
+    }
+  ],
+  "dobor_srednicy": {
+    "zasada_bezwzgledna": "Średnica komina musi być co najmniej równa średnicy króćca spalinowego kotła. Nigdy mniejsza — zwężenie niszczy ciąg i grozi zadymieniem.",
+    "typowe": {
+      "kociol_do_15kW": "Φ140mm",
+      "kociol_15_25kW": "Φ180mm",
+      "kociol_powyzej_25kW": "Φ200mm",
+      "kominek_koza_do_10kW": "Φ160-180mm",
+      "kominek_koza_10_20kW": "Φ180-200mm",
+      "kociol_gazowy_kondensacyjny": "Φ80-120mm TURBO INOX"
+    },
+    "uwaga": "Producent kotła podaje wymaganą średnicę w dokumentacji — to jest minimalne wymaganie, nie zalecenie."
+  },
+  "wysokosc_komina": {
+    "zasada": "Komin musi wystawać ponad dach zgodnie z przepisami budowlanymi.",
+    "dach_plaski_do_12_stopni": "Min. 0,6m powyżej kalenicy.",
+    "dach_stromy_pokrycie_niepalne": "Min. 1,0m w poziomie od dachu i min. 0,3m powyżej połaci.",
+    "dach_stromy_pokrycie_zapalne": "Min. 0,6m powyżej kalenicy.",
+    "przeszkody_w_poblizu": "Do 1,5m od przeszkody: min. 0,3m wyżej. 1,5-3m: na poziomie przeszkody. 3-10m: ponad płaszczyzną 12° od przeszkody.",
+    "fundament_zewnatrz": "85-115cm głębokości (zależnie od strefy mrozowej).",
+    "fundament_wewnatrz": "40-70cm głębokości."
+  },
+  "kondensat": {
+    "co_to": "Przy spalaniu pelletu i gazu spaliny są wilgotne i skraplają się w chłodnym kominie.",
+    "skutki_bez_ochrony": "Kondensat rozpuszcza zwykłą zaprawę murarską między wkładami. Efekt: utrata szczelności, przesiąkanie do tynku, plamy na ścianach, korozja fundamentu.",
+    "rozwiazanie_pekabet": "Misa kondensatu na dole zbiera skropliny i odprowadza przez rurkę. UNIWERSAL ma izolację — wkłady są ciepłe, kondensat nie osiada. FIRE bez izolacji jest podatny na uszkodzenia przy pellecie i gazie."
+  },
+  "nasady_kominowe": {
+    "stożek": "Najpopularniejsza. Wspomaga ciąg. Z rurą (wkładana w ceramikę) lub z płytą (mocowana do czapy). Chroni wełnę przed deszczem.",
+    "strażak": "Obrotowa samonastawna — ustawia się z wiatrem, wzmacnia ciąg podciśnieniem. Warianty ozdobne: Mustang, Wiewiórka, Kogut, Husaria, Łezka. Polecana gdy klient ma problem z przeciągami lub słabym ciągiem.",
+    "parasol": "Ochrona przed opadami i estetyka. Nie wspomaga ciągu.",
+    "napoleon": "Ochrona przed opadami, elegancki wygląd.",
+    "system_click_blocker": "Wszystkie nasady z rurą mają system CLICK BLOCKER blokujący nasadę w ceramice."
+  },
+  "akcesoria_techniczne": [
+    {
+      "nazwa": "Misa kondensatu",
+      "opis": "Podstawa każdego komina ceramicznego. Zbiera kondensat i odprowadza rurką. Bez niej kondensat niszczy fundament."
+    },
+    {
+      "nazwa": "Wyczystka (trójnik wyczystkowy)",
+      "opis": "Umożliwia czyszczenie komina. Wymagana przepisami (4 razy w roku). Drzwiczki min. 30cm nad posadzką."
+    },
+    {
+      "nazwa": "Czopuch (trójnik przyłączeniowy)",
+      "opis": "Łączy kocioł z kominem. Wysokość dobierana do projektu."
+    },
+    {
+      "nazwa": "Kratka wentylacyjna",
+      "opis": "Do kanałów wentylacyjnych i wentylowania izolacji termicznej komina."
+    },
+    {
+      "nazwa": "Redukcja kominowa",
+      "opis": "Łączy rurę metalową z ceramicznym czopuchem. Wewnętrzna, zewnętrzna lub INOX."
+    },
+    {
+      "nazwa": "Przedłużenie kominowe",
+      "opis": "Do kominów za niskich lub z problemem słabego ciągu. Izolowane i nieizolowane."
+    },
+    {
+      "nazwa": "Przejście przez ścianę",
+      "opis": "Do komina zewnętrznego gdy kocioł jest wewnątrz. Musi być metalowe i izolowane."
+    },
+    {
+      "nazwa": "System STABIL",
+      "opis": "Zbrojenie i stabilizacja komina zewnętrznego wystającego max 120cm nad dach."
+    }
+  ],
+  "najczestsze_bledy_klientow": [
+    "Brak cokołu — wyczystka musi być min. 30cm nad posadzką. Bez cokołu kominiarz nie odbierze komina.",
+    "Zabetonowanie wkładów na sztywno — ceramika rozszerza się przy nagrzewaniu, pęka gdy jest unieruchomiona.",
+    "Zaprawa murarska zamiast szamotowej — zaprawa murarska nie jest kwasoodporna, kondensat ją rozpuści.",
+    "Brak wyczystki — bez niej nie można wyczyścić komina co jest obowiązkiem 4x w roku.",
+    "Komin za niski — słaby ciąg, cofanie spalin przy wietrze.",
+    "Dwa piece do jednego kanału — zabronione przepisami.",
+    "Brak odbioru kominiarskiego przed pierwszym uruchomieniem — bez tego utrata gwarancji."
+  ],
+  "gwarancja": {
+    "okres": "30 lat",
+    "warunki": [
+      "Oryginalne akcesoria Pekabet",
+      "Montaż zgodny z instrukcją producenta",
+      "Protokół odbioru kominiarskiego",
+      "Czyszczenie 4 razy w roku",
+      "Atestowane źródło ciepła odpowiednie do parametrów komina"
+    ]
+  },
+  "pozostale_produkty": [
+    {
+      "kategoria": "schody",
+      "nazwa": "Schody modułowe MODULO ocynk",
+      "opis": "Schody zewnętrzne modułowe ocynkowane. Łatwy montaż, regulowana wysokość.",
+      "cena_orientacyjna": "od 780 zł"
+    },
+    {
+      "kategoria": "ogrodzenia",
+      "nazwa": "Płyta ogrodzeniowa betonowa",
+      "opis": "Betonowa płyta do ogrodzeń panelowych.",
+      "cena_orientacyjna": "215 zł/szt"
+    },
+    {
+      "kategoria": "paleniska",
+      "nazwa": "Palenisko LOTOS 60",
+      "opis": "Palenisko ogrodowe stalowe, średnica 60cm.",
+      "cena_orientacyjna": "1200 zł"
+    },
+    {
+      "kategoria": "wędzarnie",
+      "nazwa": "Wędzarnie DAVID i GOLIATH",
+      "opis": "Stalowe wędzarnie ogrodowe. DAVID (730-1580 zł), GOLIATH (1433-5349 zł). Wersje: standard, izolowany, STRONG, Hot&Cold, Corten, nierdzewna.",
+      "cena_orientacyjna": "od 630 zł"
+    },
+    {
+      "kategoria": "fotowoltaika",
+      "nazwa": "Panele fotowoltaiczne",
+      "opis": "4 panele składane 210W (918 zł) lub panel 415W z inwerterem (2368 zł).",
+      "cena_orientacyjna": "od 918 zł"
+    }
+  ],
+  "czego_nie_ma_w_ofercie": [
+    "Kotły grzewcze",
+    "Wkłady kominkowe (inserty)",
+    "Piece wolnostojące (kozy) — tylko kominy do nich",
+    "Usługi montażowe",
+    "Produkty marek: Schiedel, Jawar, Briotherm, Almeva, Jeremias"
+  ],
+  "uwagi_sprzedazowe": {
+    "konfigurator": "Konfigurator na pekabet.pl — klient wybiera system i konfiguruje po podaniu parametrów. Wymaga znajomości: paliwa, średnicy, wysokości.",
+    "darek": "Darek — opiekun klienta Pekabet. Potwierdza dostępność, przygotowuje wycenę i termin dostawy.",
+    "telefon": "95 75 10 500",
+    "email": "biuro@pekabet.pl",
+    "dostawa": "3-5 dni roboczych. Darmowa wysyłka na terenie kraju.",
+    "newsletter": "Zapis na newsletter daje rabat na zakupy.",
+    "kod_rabatowy": "Kod 'instrukcja' daje 10% rabatu na daszek kominowy."
+  },
+  "uwagi_marka": {
+    "PEKA_vs_PEKABET": "PEKA to sub-marka Pekabetu. Ta sama technologia, ta sama ceramika Wolfshöher Tonwerke, te same zasady montażu i gwarancja. Różni się nazwą handlową i opakowaniem. W rozmowie z klientem traktuj PEKA i PEKABET jako jeden system.",
+    "systemy_PEKA": "SYSTEM PEKA (Φ140, Φ200) to kominy ceramiczne do wysokich instalacji do 15m. Odpowiednik systemów PEKABET pod marką PEKA."
+  }
+}

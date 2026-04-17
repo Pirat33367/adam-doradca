@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Adam — Pekabet</title>
+
+<!-- PWA -->
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0066cc">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Adam">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap');
+
+:root {
+  --p: #0066cc;
+  --pd: #004a99;
+  --p-light: #3385d6;
+  --bg: #0a0f1e;
+  --bg2: #0f172a;
+  --card: #ffffff;
+  --text: #0f172a;
+  --text-light: #64748b;
+  --line: #e2e8f0;
+  --line-dark: #1e293b;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: Outfit, system-ui, sans-serif;
+  background: var(--bg);
+  height: 100dvh;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* ─── BACKGROUND ─── */
+.bg {
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 120% 60% at 10% -10%, #1e3a6e 0%, transparent 55%),
+    radial-gradient(ellipse 80% 50% at 90% 110%, #0c2a5e 0%, transparent 50%),
+    var(--bg);
+}
+.bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,.03) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+
+/* ─── FAB ─── */
+.fab {
+  position: fixed;
+  right: 24px;
+  bottom: calc(24px + var(--safe-bottom));
+  z-index: 50;
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--p-light), var(--pd));
+  box-shadow: 0 8px 32px rgba(0,102,204,.45), 0 2px 8px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.15);
+  display: grid; place-items: center;
+  cursor: pointer;
+  transition: transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s;
+  border: none;
+}
+.fab:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 16px 40px rgba(0,102,204,.5); }
+.fab:active { transform: scale(.95); }
+.fab svg { width: 28px; height: 28px; fill: #fff; }
+
+/* pulse ring */
+.fab::before {
+  content: '';
+  position: absolute; inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(0,102,204,.3);
+  animation: pulse 2.5s ease-out infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(1); opacity: .8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+/* ─── MODAL ─── */
+.modal {
+  position: fixed; inset: 0;
+  display: none; place-items: center;
+  background: rgba(5,10,24,.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 100;
+  padding: 16px;
+  padding-top: calc(16px + var(--safe-top));
+  padding-bottom: calc(16px + var(--safe-bottom));
+}
+.modal.show { display: grid; animation: fadeIn .25s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* standalone PWA — full screen */
+@media (display-mode: standalone) {
+  .modal { display: grid !important; padding: 0; }
+  .fab { display: none; }
+  .card { width: 100%; height: 100dvh; border-radius: 0; }
+}
+
+/* ─── CARD ─── */
+.card {
+  width: min(480px, 100%);
+  height: min(800px, 92dvh);
+  background: var(--card);
+  border-radius: 24px;
+  box-shadow:
+    0 32px 80px rgba(0,0,0,.5),
+    0 0 0 1px rgba(255,255,255,.06);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  animation: slideUp .3s cubic-bezier(.22,.68,0,1.2);
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px) scale(.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ─── HEADER ─── */
+.head {
+  background: linear-gradient(135deg, var(--p) 0%, var(--pd) 100%);
+  padding: 18px 20px;
+  display: flex; align-items: center; gap: 14px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+.head::after {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.05);
+}
+.av-wrap {
+  position: relative; flex-shrink: 0;
+}
+.av {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.18);
+  border: 2px solid rgba(255,255,255,.3);
+  display: grid; place-items: center;
+  backdrop-filter: blur(8px);
+}
+.av svg { width: 22px; height: 22px; fill: #fff; }
+.online {
+  position: absolute; bottom: 1px; right: 1px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: #22c55e;
+  border: 2px solid var(--p);
+}
+.head-info { flex: 1; min-width: 0; }
+.head-info b { display: block; font-size: 16px; font-weight: 600; color: #fff; }
+.head-info span { font-size: 12px; color: rgba(255,255,255,.75); font-weight: 300; }
+.head-actions { display: flex; gap: 6px; }
+.icon-btn {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.12);
+  border: none; cursor: pointer;
+  display: grid; place-items: center;
+  transition: background .15s;
+  color: #fff;
+}
+.icon-btn:hover { background: rgba(255,255,255,.22); }
+.icon-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+/* ─── CHAT ─── */
+.chat {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 20px 16px;
+  background: #f8fafc;
+  background-image:
+    radial-gradient(circle at 1px 1px, #e2e8f0 1px, transparent 0);
+  background-size: 28px 28px;
+  scroll-behavior: smooth;
+}
+.chat::-webkit-scrollbar { width: 4px; }
+.chat::-webkit-scrollbar-track { background: transparent; }
+.chat::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 2px; }
+
+/* messages */
+.msg {
+  display: flex; gap: 10px;
+  margin-bottom: 18px;
+  animation: msgIn .3s cubic-bezier(.22,.68,0,1.1);
+}
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.msg.user { flex-direction: row-reverse; }
+
+.av-sm {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  flex-shrink: 0; margin-top: 2px;
+}
+.av-sm.bot {
+  background: linear-gradient(135deg, var(--p), var(--pd));
+  display: grid; place-items: center;
+}
+.av-sm.bot svg { width: 15px; height: 15px; fill: #fff; }
+.av-sm.user {
+  background: linear-gradient(135deg, #64748b, #475569);
+  display: grid; place-items: center;
+  font-size: 11px; font-weight: 600; color: #fff;
+}
+
+.msg-content { max-width: 76%; display: flex; flex-direction: column; }
+.msg.user .msg-content { align-items: flex-end; }
+
+.bubble {
+  padding: 12px 16px;
+  border-radius: 18px;
+  font-size: 14px; line-height: 1.55;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+}
+.msg.bot .bubble {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-bottom-left-radius: 6px;
+  color: var(--text);
+}
+.msg.user .bubble {
+  background: linear-gradient(135deg, var(--p), var(--pd));
+  color: #fff;
+  border-bottom-right-radius: 6px;
+}
+.msg-time {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 5px;
+  padding: 0 4px;
+}
+
+/* typing dots */
+.typing { display: flex; gap: 5px; padding: 4px 0; align-items: center; }
+.typing span {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #94a3b8;
+  animation: dot 1.4s infinite;
+}
+.typing span:nth-child(2) { animation-delay: .18s; }
+.typing span:nth-child(3) { animation-delay: .36s; }
+@keyframes dot {
+  0%,60%,100% { transform: translateY(0); opacity: .4; }
+  30% { transform: translateY(-6px); opacity: 1; }
+}
+
+/* ─── FOOTER ─── */
+.foot {
+  padding: 14px 16px;
+  padding-bottom: calc(14px + var(--safe-bottom));
+  background: #fff;
+  border-top: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.attach-prev { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+.attach-prev img {
+  height: 56px; border-radius: 8px;
+  border: 1px solid var(--line);
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+.input-row {
+  display: flex; align-items: flex-end; gap: 10px;
+  background: #f1f5f9;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  padding: 10px 12px;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+.input-row:focus-within {
+  border-color: var(--p);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(0,102,204,.1);
+}
+textarea {
+  flex: 1; border: 0; background: transparent;
+  resize: none; max-height: 120px;
+  font: 14px/1.5 Outfit, system-ui;
+  outline: none;
+  color: var(--text);
+}
+textarea::placeholder { color: #94a3b8; }
+
+.btn-icon {
+  width: 38px; height: 38px;
+  border-radius: 10px; border: 0;
+  display: grid; place-items: center;
+  cursor: pointer; flex-shrink: 0;
+  transition: background .15s, transform .1s;
+}
+.btn-icon:active { transform: scale(.92); }
+.btn-attach {
+  background: transparent; color: #94a3b8;
+}
+.btn-attach:hover { background: #e2e8f0; color: var(--p); }
+.btn-attach svg { width: 20px; height: 20px; fill: currentColor; }
+.btn-send {
+  background: linear-gradient(135deg, var(--p), var(--pd));
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0,102,204,.35);
+}
+.btn-send:hover { box-shadow: 0 6px 16px rgba(0,102,204,.45); }
+.btn-send:disabled {
+  opacity: .4; cursor: default;
+  box-shadow: none;
+}
+.btn-send svg { width: 18px; height: 18px; fill: currentColor; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 520px) {
+  .modal { padding: 0; }
+  .card { width: 100%; height: 100dvh; border-radius: 0; }
+}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+
+<!-- FAB -->
+<button class="fab" id="open" aria-label="Otwórz chat z Adamem">
+  <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-1 9H5v-2h14v2zm0-3H5V8h14v2z"/></svg>
+</button>
+
+<!-- MODAL -->
+<div class="modal" id="modal" role="dialog" aria-label="Chat z Adamem">
+  <div class="card">
+
+    <!-- HEADER -->
+    <div class="head">
+      <div class="av-wrap">
+        <div class="av">
+          <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-4.4 0-8 2.7-8 6v1h16v-1c0-3.3-3.6-6-8-6z"/></svg>
+        </div>
+        <div class="online"></div>
+      </div>
+      <div class="head-info">
+        <b>Adam</b>
+        <span>Doradca techniczny · Pekabet</span>
+      </div>
+      <div class="head-actions">
+        <button class="icon-btn" id="export" title="Eksportuj rozmowę" aria-label="Eksportuj rozmowę">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        </button>
+        <button class="icon-btn" id="close" title="Zamknij" aria-label="Zamknij chat">
+          <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- CHAT -->
+    <div class="chat" id="chat" role="log" aria-live="polite"></div>
+
+    <!-- FOOTER -->
+    <div class="foot">
+      <div class="attach-prev" id="prev"></div>
+      <div class="input-row">
+        <button class="btn-icon btn-attach" id="attach" title="Dodaj zdjęcie lub PDF" aria-label="Dodaj plik">
+          <svg viewBox="0 0 24 24"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48-1.41-1.42-8.49 8.49a4 4 0 005.66 5.66l9.19-9.19a6 6 0 00-8.49-8.49L3.05 10.1a8 8 0 0011.31 11.31l9.19-9.19-1.11-1.17z"/></svg>
+        </button>
+        <textarea id="inp" rows="1" placeholder="Napisz do Adama..." aria-label="Wiadomość"></textarea>
+        <button class="btn-icon btn-send" id="send" disabled aria-label="Wyślij">
+          <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </button>
+      </div>
+      <input type="file" id="file" accept="image/*,.pdf" hidden>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const API = '';
+const MAX_LEN = 2000;
+
+const modal   = document.getElementById('modal');
+const openBtn = document.getElementById('open');
+const closeBtn= document.getElementById('close');
+const chatEl  = document.getElementById('chat');
+const inp     = document.getElementById('inp');
+const sendBtn = document.getElementById('send');
+const fileEl  = document.getElementById('file');
+const attachBtn=document.getElementById('attach');
+const prevEl  = document.getElementById('prev');
+const exportBtn=document.getElementById('export');
+
+let sid = localStorage.getItem('pekabet_sid') || '';
+let pendingFile = null;
+
+// ─── helpers ───
+function ts() {
+  return new Date().toLocaleTimeString('pl', {hour:'2-digit', minute:'2-digit'});
+}
+
+function addMsg(text, who) {
+  const wrap = document.createElement('div');
+  wrap.className = 'msg ' + who;
+
+  const av = document.createElement('div');
+  av.className = 'av-sm ' + who;
+  if (who === 'bot') {
+    av.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-4.4 0-8 2.7-8 6v1h16v-1c0-3.3-3.6-6-8-6z"/></svg>';
+  } else {
+    av.textContent = 'Ty';
+  }
+
+  const content = document.createElement('div');
+  content.className = 'msg-content';
+
+  const bub = document.createElement('div');
+  bub.className = 'bubble';
+  bub.innerHTML = text.replace(/\n/g, '<br>');
+
+  const time = document.createElement('div');
+  time.className = 'msg-time';
+  time.textContent = ts();
+
+  content.append(bub, time);
+  wrap.append(av, content);
+  chatEl.append(wrap);
+  chatEl.scrollTop = chatEl.scrollHeight;
+}
+
+function showTyping() {
+  const wrap = document.createElement('div');
+  wrap.className = 'msg bot';
+  wrap.id = 'typing-ind';
+
+  const av = document.createElement('div');
+  av.className = 'av-sm bot';
+  av.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-4.4 0-8 2.7-8 6v1h16v-1c0-3.3-3.6-6-8-6z"/></svg>';
+
+  const content = document.createElement('div');
+  content.className = 'msg-content';
+
+  const bub = document.createElement('div');
+  bub.className = 'bubble';
+  bub.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+
+  content.append(bub);
+  wrap.append(av, content);
+  chatEl.append(wrap);
+  chatEl.scrollTop = chatEl.scrollHeight;
+}
+
+function hideTyping() {
+  const el = document.getElementById('typing-ind');
+  if (el) el.remove();
+}
+
+// ─── events ───
+function openModal() {
+  modal.classList.add('show');
+  if (!chatEl.children.length) {
+    addMsg('Dzień dobry, tu Adam. W czym mogę pomóc?', 'bot');
+  }
+  setTimeout(() => inp.focus(), 100);
+}
+
+openBtn.onclick = openModal;
+closeBtn.onclick = () => modal.classList.remove('show');
+
+// standalone PWA — otwieramy od razu
+if (window.matchMedia('(display-mode: standalone)').matches) {
+  openModal();
+}
+
+inp.oninput = () => {
+  inp.style.height = 'auto';
+  inp.style.height = Math.min(inp.scrollHeight, 120) + 'px';
+  sendBtn.disabled = !inp.value.trim() && !pendingFile;
+};
+
+inp.onkeydown = e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendBtn.click(); }
+};
+
+attachBtn.onclick = () => fileEl.click();
+
+fileEl.onchange = () => {
+  pendingFile = fileEl.files[0] || null;
+  prevEl.innerHTML = '';
+  if (pendingFile && pendingFile.type.startsWith('image/')) {
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(pendingFile);
+    prevEl.append(img);
+  }
+  sendBtn.disabled = !inp.value.trim() && !pendingFile;
+};
+
+exportBtn.onclick = () => {
+  const lines = [...chatEl.querySelectorAll('.msg')].map(m => {
+    const who = m.classList.contains('user') ? 'TY' : 'ADAM';
+    const bub = m.querySelector('.bubble');
+    return who + ': ' + (bub ? bub.innerText : '');
+  }).join('\n\n');
+  const blob = new Blob([lines], {type: 'text/plain'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'adam-' + new Date().toISOString().slice(0, 10) + '.txt';
+  a.click();
+};
+
+// ─── send ───
+async function send() {
+  const txt = inp.value.trim();
+  if (!txt && !pendingFile) return;
+  if (txt.length > MAX_LEN) {
+    addMsg('Wiadomość jest za długa (max 2000 znaków).', 'bot');
+    return;
+  }
+
+  addMsg(txt || '[plik]', 'user');
+  inp.value = '';
+  inp.style.height = 'auto';
+  sendBtn.disabled = true;
+  showTyping();
+
+  try {
+    let r;
+    if (pendingFile) {
+      const fd = new FormData();
+      fd.append('file', pendingFile);
+      if (sid) fd.append('session_id', sid);
+      if (txt) fd.append('message', txt);
+      r = await fetch(API + '/analyze', {method: 'POST', body: fd});
+      pendingFile = null;
+      prevEl.innerHTML = '';
+      fileEl.value = '';
+    } else {
+      r = await fetch(API + '/chat', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({message: txt, session_id: sid})
+      });
+    }
+    const d = await r.json();
+    sid = d.session_id;
+    localStorage.setItem('pekabet_sid', sid);
+    hideTyping();
+    addMsg(d.reply, 'bot');
+  } catch (e) {
+    hideTyping();
+    addMsg('Błąd połączenia — sprawdź internet i spróbuj ponownie.', 'bot');
+  }
+}
+
+sendBtn.onclick = send;
+
+// ─── PWA service worker ───
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js')
+      .catch(err => console.log('SW error:', err));
+  });
+}
+</script>
+</body>
+</html>
