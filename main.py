@@ -1,10 +1,27 @@
-from fastapi import FastAPI, UploadFile, File, Form
-from fastapi.responses import FileResponse
+from fastapi import FastAPI, UploadFile, File, Form, Request
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from collections import defaultdict
 from pydantic import BaseModel
 from dotenv import load_dotenv
 import anthropic
-import os, uuid, base64, json, traceback
+import os, uuid, base64, json, traceback, time
+
+# ---------- RATE LIMITING ----------
+ip_log = defaultdict(list)
+MAX_PER_IP_15MIN = 30
+
+def get_ip(request: Request) -> str:
+    fwd = request.headers.get("X-Forwarded-For")
+    return fwd.split(",")[0].strip() if fwd else (request.client.host if request.client else "unknown")
+
+def rate_ok(ip: str) -> bool:
+    now = time.time()
+    ip_log[ip] = [t for t in ip_log[ip] if now - t < 900]
+    if len(ip_log[ip]) >= MAX_PER_IP_15MIN:
+        return False
+    ip_log[ip].append(now)
+    return True
 
 try:
     import fitz
@@ -140,7 +157,7 @@ skróć, podaj co masz i zaproponuj Darka.
 ZAMKNIĘCIE
 
 Gdy masz komplet danych i dałeś rekomendację z uzasadnieniem, powiedz:
-"Masz teraz wszystko żeby skonfigurować system na pekabet.pl — tam dobierzesz dokładne elementy i zobaczysz finalną cenę. Jeśli wolisz żeby ktoś przygotował wycenę za Ciebie — Darek to zrobi, wystarczy się odezwać przez stronę."
+"Masz teraz wszystko żeby skonfigurować system na pekabet.pl — tam dobierzesz dokładne elementy i zobaczysz finalną cenę. Jeśli wolisz żeby ktoś przygotował wycenę za Ciebie — napisz do Darka na biuro@pekabet.pl lub odezwij się przez stronę."
 
 Nie powtarzaj tego przy każdej wiadomości.
 Jeśli klient kontynuuje rozmowę — odpowiadaj dalej.
@@ -172,7 +189,9 @@ def home():
 # ---------- CHAT ----------
 
 @app.post("/chat")
-def chat(data: ChatIn):
+def chat(data: ChatIn, request: Request):
+    if not rate_ok(get_ip(request)):
+        return JSONResponse(status_code=429, content={"reply": "Za dużo zapytań — spróbuj za chwilę.", "session_id": data.session_id or ""})
     sid     = data.session_id or str(uuid.uuid4())
     history = conversations.get(sid, [])
 
@@ -204,10 +223,13 @@ def chat(data: ChatIn):
 
 @app.post("/analyze")
 async def analyze(
+    request:    Request,
     file:       UploadFile = File(...),
     message:    str        = Form(None),
     session_id: str        = Form(None)
 ):
+    if not rate_ok(get_ip(request)):
+        return JSONResponse(status_code=429, content={"reply": "Za dużo zapytań — spróbuj za chwilę.", "session_id": session_id or ""})
     sid     = session_id or str(uuid.uuid4())
     history = conversations.get(sid, [])
 
